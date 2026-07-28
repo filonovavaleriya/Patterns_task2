@@ -1,10 +1,6 @@
 package ru.netology.test;
 
 import com.codeborne.selenide.Condition;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.filter.log.LogDetail;
-import io.restassured.http.ContentType;
-import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +12,7 @@ import static ru.netology.data.DataGenerator.Registration.getUser;
 import static ru.netology.data.DataGenerator.getRandomLogin;
 import static ru.netology.data.DataGenerator.getRandomPassword;
 
-class AuthTest {
+public class AuthorizationTest {
 
     @BeforeEach
     void setup() {
@@ -25,7 +21,7 @@ class AuthTest {
 
     @Test
     @DisplayName("Should successfully login with active registered user")
-    void shouldSuccessfulLoginIfRegisteredActiveUser() {
+    void shouldSuccessfullyLoginIfRegisteredActiveUser() {
         var registeredUser = getRegisteredUser("active");
         $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
         $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
@@ -42,7 +38,7 @@ class AuthTest {
         $("button.button").click();
         $("[data-test-id='error-notification'] .notification__content")
                 .shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"))
-                .shouldBe((Condition.visible));
+                .shouldBe(Condition.visible);
     }
 
     @Test
@@ -54,7 +50,7 @@ class AuthTest {
         $("button.button").click();
         $("[data-test-id='error-notification'] .notification__content")
                 .shouldHave(Condition.text("Ошибка! Пользователь заблокирован"))
-                .shouldBe((Condition.visible));
+                .shouldBe(Condition.visible);
     }
 
     @Test
@@ -67,7 +63,7 @@ class AuthTest {
         $("button.button").click();
         $("[data-test-id='error-notification'] .notification__content")
                 .shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"))
-                .shouldBe((Condition.visible));
+                .shouldBe(Condition.visible);
     }
 
     @Test
@@ -80,6 +76,6 @@ class AuthTest {
         $("button.button").click();
         $("[data-test-id='error-notification'] .notification__content")
                 .shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"))
-                .shouldBe((Condition.visible));
+                .shouldBe(Condition.visible);
     }
 }
